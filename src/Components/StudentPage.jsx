@@ -97,7 +97,8 @@ const StudentPage = () => {
 
           {
             questionData.map((item, index)=>(
-              <div key={index}>
+              item.testName === "None" ? "" :
+              <div style={{minWidth: "20rem"}} key={index}>
                 <p>{item.testName}</p>
                 <button onClick={()=>showVerifyBox(item.otp, item.questionID.question)} className="open-test-btn">
                   Open Test

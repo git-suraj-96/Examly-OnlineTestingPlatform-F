@@ -16,6 +16,7 @@ const TeacherSetQuestion = () => {
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
     const submitBody = useRef(null);
+    const titleRef = useRef(null);
 
     const handleOnAddNew = () => {
         setCount(count + 1);
@@ -25,7 +26,10 @@ const TeacherSetQuestion = () => {
 
     const handleOnCompleted = () => {
         if(count === 0) return;
-        if(questionTopic === "") return toast.warn("All fields are required.");
+        if(questionTopic === ""){
+            titleRef.current.focus();
+            return toast.info("Please Enter Title Of Test.");
+        } 
         try{
             setQuestionArray();
             submitBody.current.style.display = "block";
@@ -40,7 +44,7 @@ const TeacherSetQuestion = () => {
     const handleOnSubmit = async () => {
         if (count === 0) return;
         try {
-            if(questionTopic === "") return toast.warn("All fields are required.");
+            if(questionTopic === "") return toast.info("Please Write Title Of Test.");
             const response = await axios.post(`${api}/teacher/setquestion`, { questionBank, questionTopic, token});
             if(response.data.success){
                 console.log(response.data);      
@@ -54,10 +58,16 @@ const TeacherSetQuestion = () => {
                 navigate('/teacher');
             }, 2000);
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
+            if(err.response.status === 402 && err.response.statusText === "Payment Required"){
+                toast.info(err.response.data.message);
+                setTimeout(()=>{
+                    navigate('/teacher/payment');
+                }, 2000);
+            }
         }
 
-    }
+    };
 
     const setQuestionArray = () => {
         let parentChild = questionBoxRef.current;
@@ -97,8 +107,8 @@ const TeacherSetQuestion = () => {
             <Header />
             <main className='teacher-main'>
                 <div className='test-topic-div'>               
-                     <label htmlFor='testtopic'>Test Topic*</label>
-                    <input value={questionTopic} onChange={(e) => setQuestionTopic(e.target.value)} name='testtopic' id='testtopic' className='set-question-topic' type="text" placeholder='Enter your test topic...' />
+                     <label htmlFor='testtopic'>Test Title*</label>
+                    <input ref={titleRef} value={questionTopic} onChange={(e) => setQuestionTopic(e.target.value)} name='testtopic' id='testtopic' className='set-question-topic' type="text" placeholder='Enter your test title...' />
                 </div>
 
                 <div >

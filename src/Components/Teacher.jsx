@@ -72,10 +72,30 @@ const Teacher = () => {
             <Header />
             <main>
                 <div className='t-main'>
-                    <button onClick={allStudentdDetails}>All Students Details</button>
-                    <button onClick={newTestDetails}>Get Test OTP & Details</button>
-                    <button onClick={testDetails}>Test Result</button>
-                    <button><Link to="/teacher/setquestion">Set Question</Link></button>
+                    <button style={{ backgroundColor: "#3498db", color: "white" }} onClick={allStudentdDetails}>
+                        All Students Details
+                    </button>
+
+                    <button style={{ backgroundColor: "#9b59b6", color: "white" }} onClick={newTestDetails}>
+                        Get Test OTP & Details
+                    </button>
+
+                    <button style={{ backgroundColor: "#2ecc71", color: "white" }} onClick={testDetails}>
+                        Test Result
+                    </button>
+
+                    <button style={{ backgroundColor: "#f39c12", color: "white" }}>
+                        <Link to="/teacher/setquestion" style={{ color: "white", textDecoration: "none" }}>
+                            Set Question
+                        </Link>
+                    </button>
+
+                    <button style={{ backgroundColor: "#e74c3c", color: "white" }}>
+                        <Link to="/teacher/payment" style={{ color: "white", textDecoration: "none" }}>
+                            Complete Payment
+                        </Link>
+                    </button>
+
                 </div>
 
                 <div ref={studentTable} className='t-student-detail'>
@@ -92,12 +112,12 @@ const Teacher = () => {
 
                         <tbody>
                             {
-                                testResult.map((item,index)=>(
+                                testResult.map((item, index) => (
                                     <tr key={index}>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.fullName}</td>
                                         <td>+91 - {item.phone}</td>
-                                        <td style={{textTransform: "none"}}>{item.email}</td>
+                                        <td style={{ textTransform: "none" }}>{item.email}</td>
                                     </tr>
                                 ))
                             }
@@ -129,7 +149,7 @@ const Teacher = () => {
                                     </tr>
                                 ))}
                             </tbody>
-                        </table> : <h1 style={{textAlign: "center", fontFamily: "Georgia, 'Times New Roman', Times, serif"}}>No Test Found</h1>
+                        </table> : <h1 style={{ textAlign: "center", fontFamily: "Georgia, 'Times New Roman', Times, serif" }}>No Test Found</h1>
                     }
 
                 </div>
@@ -152,7 +172,7 @@ const Teacher = () => {
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{item.fullName}</td>
-                                    <td>{item.finishedTest.testName}</td>
+                                    <td>{item.finishedTest.testName !== undefined ? item.finishedTest.testName : "None"}</td>
                                     <td>{item.finishedTest.finishedDate}</td>
                                     <td>{item.finishedTest.obtainedMarks}</td>
                                 </tr>
