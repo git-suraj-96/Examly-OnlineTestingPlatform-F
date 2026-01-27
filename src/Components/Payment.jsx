@@ -4,11 +4,81 @@ import paytm from '../assets/paytm.png';
 import card from '../assets/card.png';
 import phonepay from '../assets/phonepay.png';
 import Header from '../Components/Header';
+import {ToastContainer, toast} from 'react-toastify';
 
 
 const Payment = () => {
+  const api = import.meta.env.VITE_APP_URL;
+  const token = localStorage.getItem("token");
+
+  const payBtnClick = async() =>{
+    try{
+
+      let amount = 50;
+      let order = await fetch(`${api}/teacher/createorder`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ amount }),
+    });
+  
+    order = await order.json();
+    
+  
+    var options = {
+      key: "rzp_test_RldB4sV5LgYUzp",
+      amount: order.amount, // paise
+      currency: "INR",
+      name: "EXAMLY",
+      description: "Test Payment",
+      order_id: order.id,
+      method: {
+      upi: true,
+      card: true,
+      netbanking: false,
+      wallet: false,
+      emi: false,
+      payLater: false
+    },
+  
+      handler: function (response) {
+        // console.log(response);
+  
+        fetch(`${api}/teacher/verifypayment`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({response, token}),
+        })
+          .then(r => r.json())
+          .then(data => {
+            if(data.success){
+              console.log(data.message);
+              toast.success("Now you can set question.");
+            }else{
+              toast.error("Paymet failed.\nTry Again.");
+            }
+          });
+      },
+  
+      modal: {
+        ondismiss: function () {
+          alert("Payment Fail\nTry Again");
+        },
+      },
+    };  
+    new Razorpay(options).open();
+    
+    }catch(err){
+      console.log(err);
+      console.log(err.message);
+      console.log("This error is coming from payBtnClick and from line no 74 and from Payment.jsx file");
+    }
+  }
+
   return (
     <>
+        <ToastContainer/>
         <Header/>
         <div style={styles.page}>
           <div style={styles.card}>
@@ -30,7 +100,7 @@ const Payment = () => {
               <img src={card} alt="Card" style={styles.icon} />
             </div>
     
-            <button style={styles.button}>
+            <button onClick={payBtnClick} style={styles.button}>
               Pay ₹50 & Continue
             </button>
     
