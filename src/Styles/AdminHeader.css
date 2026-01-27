@@ -1,0 +1,8 @@
+.admin-header-nav{
+    background-color: white;
+    padding: 10px;
+    box-shadow: 2px 3px 5px rgb(171, 171, 171);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}

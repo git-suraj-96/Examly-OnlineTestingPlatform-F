@@ -1,0 +1,116 @@
+.student-main{
+    margin-top: 5.5rem;
+}
+
+.student-page-link{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-left: 20px;
+}
+
+.student-page-link div{
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px rgb(171, 171, 171);
+}
+
+.student-page-link div p{
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    font-weight: bolder;
+
+}
+
+.test-count{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 40px;
+    color: #1156c4;
+}
+
+.open-test-btn{
+    width: 100%;
+    height: 2rem;
+    color: white;
+    background-color: #008000cf;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    margin-top: 2rem;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.open-test-btn:active{
+    transform: scale(0.98);
+}
+
+.verify-otp{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 10px;
+    width: 20%;
+    border-radius: 5px;
+    padding-top: 20px;
+    box-shadow: 2px 2px 5px rgb(171, 171, 171);
+    display: none;
+}
+
+.verify-otp h1{
+    text-align: right;
+    margin-top: -15px;
+    margin-bottom: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+    color: red;
+    font-weight: bolder;
+}
+
+.verify-otp input{
+    height: 2rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.verify-otp input:focus{
+    outline: 1px solid rgb(3, 94, 231);
+}
+
+.verify-otp button{
+    font-size: 16px;
+    padding: 5px 0;
+    cursor: pointer;
+    background-color: #1156c4;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    width: 100%;
+}
+
+@media (max-width:600px) {
+    .student-page-link div{
+        width: 98%;
+    }
+
+    .verify-otp{
+        width: 90%;
+    }
+}

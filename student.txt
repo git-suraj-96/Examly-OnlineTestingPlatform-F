@@ -1,0 +1,42 @@
+Student Page Categories (Must-have)
+
+Dashboard
+– Total tests
+– Upcoming tests
+– Recent score
+
+My Tests
+– Active tests
+– Completed tests
+– Missed tests
+
+Take Test
+– Start test
+– Instructions
+– Timer view
+
+Results
+– Marks
+– Rank
+– Correct / Wrong answers
+– Performance graph
+
+Practice / Mock Test
+– Subject-wise practice
+– Previous tests
+– Sample papers
+
+Profile
+– Name, class, roll
+– Change password
+– Photo
+
+Notifications
+– New test alert
+– Result published
+– Announcements
+
+Help / Support
+– How to give test
+– Contact teacher/admin
+– FAQs
