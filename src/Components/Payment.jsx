@@ -5,13 +5,18 @@ import card from '../assets/card.png';
 import phonepay from '../assets/phonepay.png';
 import Header from '../Components/Header';
 import {ToastContainer, toast} from 'react-toastify';
+import Loader from './Loader';
+import LoaderContext from '../Context/LoaderContext';
+import { useContext } from 'react';
 
 
 const Payment = () => {
   const api = import.meta.env.VITE_APP_URL;
   const token = localStorage.getItem("token");
+  const {setDisplay} = useContext(LoaderContext);
 
   const payBtnClick = async() =>{
+    setDisplay("block");
     try{
 
       let amount = 50;
@@ -33,14 +38,6 @@ const Payment = () => {
       name: "EXAMLY",
       description: "Test Payment",
       order_id: order.id,
-      method: {
-      upi: true,
-      card: true,
-      netbanking: false,
-      wallet: false,
-      emi: false,
-      payLater: false
-    },
   
       handler: function (response) {
         // console.log(response);
@@ -74,10 +71,12 @@ const Payment = () => {
       console.log(err.message);
       console.log("This error is coming from payBtnClick and from line no 74 and from Payment.jsx file");
     }
+    setDisplay("none");
   }
 
   return (
     <>
+        <Loader/>
         <ToastContainer/>
         <Header/>
         <div style={styles.page}>

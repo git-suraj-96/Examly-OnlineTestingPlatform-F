@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import LoaderContext from '../Context/LoaderContext';
+import Loader from '../Components/Loader';
 
 const Teacher = () => {
     const studentTable = useRef(null);
@@ -15,20 +18,26 @@ const Teacher = () => {
     const [testResult, setTestResult] = useState([]);
     const testRef = useRef(null);
     const navigate = useNavigate();
+    const {setDisplay} = useContext(LoaderContext);
 
     const newTestDetails = () => {
+        setDisplay("block");
         studentTable.current.style.display = "none";
         testTable.current.style.display = "block";
         testRef.current.style.display = "none";
+        setDisplay("none");
     };
 
     const allStudentdDetails = () => {
+        setDisplay("block");
         studentTable.current.style.display = "block";
         testTable.current.style.display = "none";
         testRef.current.style.display = "none";
+        setDisplay("none");
     };
 
     const fetchForTestDetails = async () => {
+        setDisplay("block");
         try {
             const response = await axios.post(`${api}/teacher/testdetails`, { token });
             if (response.data.success) {
@@ -39,15 +48,19 @@ const Teacher = () => {
             console.log(err);
             console.log("This erro is coming from fetchForTestDetails method and from Teacher.jsx file")
         }
+        setDisplay("none");
     };
 
     const testDetails = () => {
+        setDisplay("block");
         testRef.current.style.display = "block";
         studentTable.current.style.display = "none";
         testTable.current.style.display = "none";
+        setDisplay("none");
     };
 
     const testFinishedBtn = async (testCode) => {
+        setDisplay("block");
         try {
             const res = await axios.post(`${api}/teacher/testfinished`, { token, testCode });
             if (res.data.success) {
@@ -60,6 +73,7 @@ const Teacher = () => {
             console.error(err);
             console.log("This error is coming from testFinishedBtn and from Teacher.jsx file and from line no 51");
         }
+        setDisplay("none");
     }
 
 
@@ -68,6 +82,7 @@ const Teacher = () => {
     }, []);
     return (
         <>
+            <Loader/>
             <ToastContainer />
             <Header />
             <main>

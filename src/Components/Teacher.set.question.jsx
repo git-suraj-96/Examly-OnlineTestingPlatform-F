@@ -63,7 +63,7 @@ const TeacherSetQuestion = () => {
                 toast.info(err.response.data.message);
                 setTimeout(()=>{
                     navigate('/teacher/payment');
-                }, 2000);
+                }, 6000);
             }
         }
 

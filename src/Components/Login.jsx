@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
+import Loader from './Loader';
+import { useContext } from 'react';
+import LoaderContext from '../Context/LoaderContext';
 
 const Login = () =>{
     const passwordBox = useRef();
@@ -15,6 +18,7 @@ const Login = () =>{
     const navigate = useNavigate();
     const [institutes, setInstitutes] = useState([]);
     const role = useRef(null);
+    const {setDisplay} = useContext(LoaderContext);
 
     const handlePasswordBox = () => {
         if(boxType === "password") setType("text");
@@ -27,6 +31,7 @@ const Login = () =>{
         const passwordValue = passwordBox.current.value;
         const instituteValue = institute.current.value;
         const roleValue = role.current.value;
+        setDisplay("block");
 
         try{
             const res = await axios.post(`${api}/user/login`, {emailValue, passwordValue, instituteValue, roleValue});
@@ -42,9 +47,11 @@ const Login = () =>{
             toast.error(err.response.data.message);
             console.log("This error is coming from login.jsx file and from handlOnsubmit Method.")
         }
+        setDisplay("none");
     }
 
     const getAllInstitutes = async() =>{
+        setDisplay("block");
         try{
             const res = await axios.get(`${api}/user/allinstitutes`);
             if(res.data.success) {
@@ -55,6 +62,7 @@ const Login = () =>{
             if(err.message === "Network Error") return navigate('/error');
             console.log("This error is coming from Login.jsx file and from getAllInstitutes routes");
         }
+        setDisplay("none");
     }
 
     useEffect(()=>{
@@ -63,6 +71,7 @@ const Login = () =>{
 
     return (
         <>
+            <Loader/>
             <ToastContainer/>
             <main className="login-main">
                 <div className='login-container' >
@@ -71,14 +80,14 @@ const Login = () =>{
                     <form onSubmit={(e)=>handleOnSubmit(e)}>
                         <label>Email</label>
                         <br/>
-                        <input ref={email} name='email' type="email" required />
+                        <input autoComplete='current-email' ref={email} name='email' type="email" required />
 
                         <br/>
 
                         <label>Password</label>
                         <br/>
                         <div className='login-password-box'>
-                            <input  ref={passwordBox} name='password' type= {boxType} required />
+                            <input autoComplete='current-password' ref={passwordBox} name='password' type= {boxType} required />
                             <img className='password-box-visible' onClick={handlePasswordBox} src={Visible} alt="Visible" />
                         </div>
                         <br/>
