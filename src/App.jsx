@@ -13,6 +13,7 @@ import ProtectedRoutesAdmin from './Components/ProtectedRoutesAdmin';
 import { Navigate } from 'react-router-dom';
 import OpenTest from './Components/OpenText';
 import Payment from './Components/Payment';
+import Update from './Components/Teacher.update';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path='/student' element={<ProtectedRoutesStudent><StudentPage/></ProtectedRoutesStudent>} />
           <Route path='/student/opentest' element={<ProtectedRoutesStudent><OpenTest/></ProtectedRoutesStudent>} />
           <Route path='/teacher/setquestion' element={<ProtectedRoutesTeacher><TeacherSetQuestion/></ProtectedRoutesTeacher>} />
+          <Route path='/teacher/update' element={<ProtectedRoutesTeacher><Update/></ProtectedRoutesTeacher>} />
           <Route path='/teacher' element={<ProtectedRoutesTeacher><Teacher/></ProtectedRoutesTeacher>} />
           <Route path='/teacher/payment' element={<ProtectedRoutesTeacher><Payment/></ProtectedRoutesTeacher>} />
           <Route path='/admin' element={<ProtectedRoutesAdmin><Admin/></ProtectedRoutesAdmin>} />

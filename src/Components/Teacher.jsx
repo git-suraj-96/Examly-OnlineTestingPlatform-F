@@ -105,6 +105,12 @@ const Teacher = () => {
                         </Link>
                     </button>
 
+                    <button style={{ backgroundColor: "#008BFF", color: "white" }}>
+                        <Link to="/teacher/update" style={{ color: "white", textDecoration: "none" }}>
+                            Update Question
+                        </Link>
+                    </button>
+
                     <button style={{ backgroundColor: "#e74c3c", color: "white" }}>
                         <Link to="/teacher/payment" style={{ color: "white", textDecoration: "none" }}>
                             Complete Payment

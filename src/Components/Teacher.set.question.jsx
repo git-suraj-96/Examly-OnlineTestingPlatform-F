@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
+import { useContext } from 'react';
+import LoaderContext from '../Context/LoaderContext';
 
 const TeacherSetQuestion = () => {
     const [questionBox, addQuestionBox] = useState([]);
@@ -17,6 +19,7 @@ const TeacherSetQuestion = () => {
     const navigate = useNavigate();
     const submitBody = useRef(null);
     const titleRef = useRef(null);
+    const {setDisplay} = useContext(LoaderContext);
 
     const handleOnAddNew = () => {
         setCount(count + 1);
@@ -43,6 +46,7 @@ const TeacherSetQuestion = () => {
 
     const handleOnSubmit = async () => {
         if (count === 0) return;
+        setDisplay("block");
         try {
             if(questionTopic === "") return toast.info("Please Write Title Of Test.");
             const response = await axios.post(`${api}/teacher/setquestion`, { questionBank, questionTopic, token});
@@ -51,10 +55,12 @@ const TeacherSetQuestion = () => {
                 toast.success("Question set successfully.")          
             }else if(response.data.success === false && response.data.message === "jwt expired") {
                 console.log(response.data.message)
+                setDisplay("none");
                 return navigate('/login')
             };
             setTimeout(()=>{
                 document.body.style.overflow = "auto";
+                setDisplay("none");
                 navigate('/teacher');
             }, 2000);
         } catch (err) {

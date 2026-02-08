@@ -23,8 +23,8 @@ const QuestionComponent = (props)=>{
                         </div>
                     </div>
                     <div className='teacher-correct-answer'>
-                        <p>CORRECT ANSWER</p>
-                        <input className="correct-answer" type='text' />
+                        <p>Enter Correct Option(A/B/C/D) </p>
+                        <input className="correct-answer" placeholder="Enter Correct Option(A/B/C/D)" type='text' />
                     </div>
                 </div>
         </>

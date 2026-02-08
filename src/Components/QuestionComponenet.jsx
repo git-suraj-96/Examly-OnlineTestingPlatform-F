@@ -17,10 +17,10 @@ const Question = (props) => {
             </div>
 
             <div className='question-comp-option-box'>
-                <button className={selected === "optionA" ? "green" : "white"} onClick={()=>{props.setMethod(props.optionA, props.correctAnswer, props.number), handleOnOptionClick("optionA")}}>{props.optionA}</button>
-                <button className={selected === "optionB" ? "green" : "white"} onClick={()=>{props.setMethod(props.optionB, props.correctAnswer, props.number), handleOnOptionClick("optionB")}}>{props.optionB}</button>
-                <button className={selected === "optionC" ? "green" : "white"} onClick={()=>{props.setMethod(props.optionC, props.correctAnswer, props.number), handleOnOptionClick("optionC")}}>{props.optionC}</button>
-                <button className={selected === "optionD" ? "green" : "white"} onClick={()=>{props.setMethod(props.optionD, props.correctAnswer, props.number), handleOnOptionClick("optionD")}}>{props.optionD}</button>
+                <button className={selected === "optionA" ? "green" : "white"} onClick={()=>{props.setMethod("a", props.correctAnswer, props.number), handleOnOptionClick("optionA")}}>{props.optionA}</button>
+                <button className={selected === "optionB" ? "green" : "white"} onClick={()=>{props.setMethod("b", props.correctAnswer, props.number), handleOnOptionClick("optionB")}}>{props.optionB}</button>
+                <button className={selected === "optionC" ? "green" : "white"} onClick={()=>{props.setMethod("c", props.correctAnswer, props.number), handleOnOptionClick("optionC")}}>{props.optionC}</button>
+                <button className={selected === "optionD" ? "green" : "white"} onClick={()=>{props.setMethod("d", props.correctAnswer, props.number), handleOnOptionClick("optionD")}}>{props.optionD}</button>
             </div>
         </div>
     )
